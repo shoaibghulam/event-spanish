@@ -1,0 +1,76 @@
+{% extends "public/layout/base.html" %}
+{% load static %}
+{% block body %}
+
+
+<div class="single-class-bg page-head parallax overlay">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+              {% for message in messages %}
+    <div class=" mb-0 alert-dismissible show" role="alert">
+        <strong>Atención:</strong> {{message}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% endfor %}
+                <div class="section-title text-center">
+                    <h3> Eventos </h3>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <ol class="breadcrumb">
+                    <li><a href="javascript:void(0)">Inicio</a></li>
+                    <li>।</li>
+                    <li>Eventos</li>
+                </ol>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<div class="single-class ">
+
+    <div class="product-area shopping-area pad90">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="section-title text-center">
+                        <div class="title-bar full-width mb20">
+                            <img src="{% static ''%}landing/assets/images/logo/ttl-bar.png" alt="title-img">
+
+                        </div>
+                        <h3>Mis eventos</h3>
+                        <p>look your best feel even better</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+                {% for d in data %}
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="product-box mt40 mt-4 mb-4">
+                        <img class="img-fluid" src="{{d.EventId.Event_logo.url}}" style="width:100%; height: 226px;"/>
+                        <a class="btn btn-primary btn-block" href="/eventapp/{{d.EventId.EventId}}">{{d.EventId.EventName}}</a>
+                    </div>
+                </div>
+                {% endfor %}
+              
+               
+            </div>
+
+        </div>
+
+    </div>
+
+
+</div>
+{% endblock body %}

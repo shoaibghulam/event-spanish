@@ -1,0 +1,119 @@
+{% extends "superadmin/base.html" %}
+{% block body %}
+<div class="container-fluid">
+    <div class="page-titles">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active"><a href="javascript:void(0)">User</a></li>
+            <li class="breadcrumb-item"><a href="javascript:void(0)">User List</a></li>
+        </ol>
+    </div>
+  
+    {% for message in messages %}
+    <div class="alert alert-{{message.tags}} mb-0 alert-dismissible  show" role="alert">
+        <strong>Atención:</strong> {{message}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+{% endfor %}
+    <div class="row">
+        <div class="col-lg-12">
+      
+            <div class="table-responsive">
+                <table id="example-5" class="table display mb-4  fs-14">
+                    <thead>
+                        <tr>
+                            <th>
+                                <div class="checkbox mr-0 align-self-center">
+                                    <div class="custom-control custom-checkbox ">
+                                        <input type="checkbox" class="custom-control-input" id="checkAll" required="">
+                                        <label class="custom-control-label" for="checkAll"></label>
+                                    </div>
+                                </div>
+                            </th>
+                         
+                            <th> Name</th>
+
+                            <th>email</th>
+                            <th>subject</th>
+                            <th>message</th>
+                            <th>action</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for d in data %}
+                        <tr>
+                            <td>
+                                <div class="checkbox mr-0 align-self-center">
+                                    <div class="custom-control custom-checkbox ">
+                                        <input type="checkbox" class="custom-control-input" id="customCheckBox2"
+                                            required="">
+                                        <label class="custom-control-label" for="customCheckBox2"></label>
+                                    </div>
+                                </div>
+                            </td>
+                            
+                            
+                            
+                          
+                            <td>{{d.contact_name}}</td>
+                            <td>{{d.contact_email}}</td>
+                            <td>{{d.contact_subject}}</td>
+                            <td><button onclick="viewmsg(`{{d.contact_comment}}`)" class="btn btn-primary"  data-toggle="modal" data-target="#exampleModalLong"><i class="fa fa-eye fa-2x"></i></button></td>
+
+                            <td>
+                                <div class="d-flex">
+                                 
+                                    <a href="superadmindelevent/{{d.pk}}"  class="ml-4">
+                                        <i class="fa fa-trash fa-2x" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Contact Message</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="msg">
+       
+    
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Update </button>
+    </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock body %}
+
+{% block script %}
+<script>
+
+    
+const viewmsg=(msg)=>{
+    $('#msg').text(msg);
+}
+
+  
+
+
+
+</script>
+{% endblock script %}

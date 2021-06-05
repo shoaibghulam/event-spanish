@@ -1,0 +1,90 @@
+{% extends "superadmin/base.html" %}
+{% load static %}
+{% block body %}
+<div class="container-fluid">
+    <div class="page-titles">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active"><a href="javascript:void(0)">User</a></li>
+            <li class="breadcrumb-item"><a href="javascript:void(0)">User List</a></li>
+        </ol>
+    </div>
+
+    <div class="row">
+
+        <div class="col-lg-12">
+            <div class="col-xl-12">
+                <div class="card">
+                    <!-- <div class="card-body row d-sm-flex d-block align-items-center"> -->
+                        <!-- <div class="media col-sm-5 mb-2 mb-sm-0  align-items-center">
+                            <i class="fa fa-dollar-square"></i> -->
+                            <!-- <div class="media-body">
+                                <p class="text-white mb-2 font-w300">Income</p>
+                                <span class="fs-26 text-white">$126,000</span>
+                            </div> -->
+                        <!-- </div> -->
+                        <!-- <div class="col-sm-7">
+                            <p class="fs-12 mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                                quis
+                            </p>
+                        </div>
+                    </div> -->
+                <!-- </div> -->
+                <!-- chart start -->
+                <!-- <div class="col-xl-12 col-lg-12 col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Basic Line Chart</h4>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="lineChart_1"></canvas>
+                        </div>
+                    </div>
+                </div> -->
+                <!-- chart end -->
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <div class="table-responsive">
+                <table id="example-5" class="table display mb-4  fs-14">
+                    <thead>
+                        <tr>
+                           
+                            
+                            <th>Order Id</th>
+                            <th>User Name</th>
+                            <th>Event</th>
+                            
+                            <th>Amount</th>
+                            <th>date</th>
+
+                            
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for d in data%}
+                        <tr>
+                            
+                            
+                            <td>{{d.order_id}}</td>
+                            <td>{{d.user_id}}</td>
+                            <td>{{d.event_id}}</td>
+                            <td>PYG {{d.totalAmount}}</td>
+                            <td>{{d.createdDate}}</td>
+                            
+
+                        </tr>
+                        {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock body %}
+{% block script %}
+<script src="{% static '' %}public/js/plugins-init/chartjs-init.js" type="text/javascript"></script>
+
+{% endblock script %}

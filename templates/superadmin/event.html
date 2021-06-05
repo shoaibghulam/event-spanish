@@ -1,0 +1,397 @@
+{% extends "superadmin/base.html" %}
+{% block body %}
+{% for message in messages %}
+<div class="alert alert-{{message.tags}} mb-0 alert-dismissible  show" role="alert">
+    <strong>Message:</strong> {{message}}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+{% endfor %}
+<div class="container-fluid">
+    <div class="page-titles">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active"><a href="javascript:void(0)">Event</a></li>
+            <li class="breadcrumb-item"><a href="javascript:void(0)">International Live Choir Festivals 2020 </a></li>
+        </ol>
+    </div>
+    <div class="col-md-3 mb-4">
+
+        <a href="{% url 'superadminaddevent' %}" class="btn btn-primary light  btn-lg btn-block rounded ">Add new
+            Event</a>
+    </div>
+    <div class="row">
+
+        {% for d in data %}
+        <div class="col-xl-6 col-xxl-6 col-xs-12 mb-4">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="media-body">
+                                <div class="d-md-flex d-block justify-content-between">
+                                    <h4 class="fs-22">{{d.EventName}}</h4>
+                                    <div class="dropdown custom-dropdown mb-0 d-md-block d-none">
+                                        <div data-toggle="dropdown">
+                                            <i class="flaticon-381-settings-2" style="font-size:40px"></i>
+                                        </div>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <a class="dropdown-item" href="/superadmineditevent/{{d.EventId}}">Update</a>
+                                            <a class="dropdown-item text-danger"  onclick="deleteevents('{{d.EventId}}')">Delete</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <span class="text-primary d-block mb-3">
+
+                                    {{d.EventTypeId}}</span>
+                                <p class="fs-14 text-white font-w200">
+                                    {{d.Description}}
+                                </p>
+                            </div>
+                            <div
+                                class="media d-md-flex d-block border-bottom pb-sm-4 pb-2 mb-4 text-md-left text-center">
+                                <img src="{{d.Event_logo.url}}" alt="" width="100%" height="200px"
+                                    class="rounded mr-0 mr-md-4 mb-2 mb-md-0">
+
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-3 col-md-6 col-xxl-6 mb-3">
+                                    <div class="media bgl-primary p-3 rounded align-items-center">
+
+
+                                        <div class="media-body">
+                                            <span class="fs-12 d-block mb-1">Ticket Price</span>
+                                            <span class="fs-18 text-white">PYG {{d.Cost}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-6 col-xxl-6 mb-3">
+                                    <div class="media bgl-primary p-3 rounded align-items-center">
+                                        <i class="fas fa-dollar-sign"></i>
+                                        <div class="media-body">
+                                            <span class="fs-12 d-block mb-1">Start  Date</span>
+                                            <span class="fs-18 text-white">{{d.Registration_start}}</span>
+                                        </div>
+                                        <div class="media-body">
+                                            <span class="fs-12 d-block mb-1">End  Date</span>
+                                            <span class="fs-18 text-white">{{d.Registration_end}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-5 col-md-12 col-xxl-12">
+                                    <div class="media bgl-primary p-3 rounded align-items-center">
+                                        <i class="fas fa-calendar-week"></i>
+                                        <div class="media-body">
+                                            <span class="fs-12 d-block mb-1">Status</span>
+                                            <span class="fs-18 text-white">{{d.Status}}</span>
+                                        </div>
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="card overflow-hidden">
+                        <!-- <div class="card-header border-0 pb-0">
+                            <div>
+                                <p class="mb-2 font-w100">Revenue</p>
+                                <h3 class="mb-0 fs-24 font-w600">$124,136</h3>
+                            </div>
+                        </div> -->
+                        <div class="card-body p-0">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="card overflow-hidden">
+                        <!-- <div class="card-header border-0 pb-0">
+                            <div>
+                                <p class="mb-2 font-w100">Ticket Ordered</p>
+                                <h3 class="mb-0 fs-20 font-w600">639 Pcs</h3>
+                            </div>
+                        </div> -->
+                        <div class="card-body p-0">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card overflow-hidden bg-image bg-danger">
+                        <!-- <div class="card-header  border-0">
+                            <div>
+                                <p class="mb-2 font-w100 text-white">Ticket Refunded</p>
+                                <h3 class="mb-0 fs-20 font-w600">25 Left</h3>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+        {% endfor %}
+        <!-- <div class="col-xl-6 col-xxl-6 col-xs-12 mb-4">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="media-body">
+                                <div class="d-md-flex d-block justify-content-between">
+                                    <h4 class="fs-22">The Story of Danau Toba</h4>
+                                    <div class="dropdown custom-dropdown mb-0 d-md-block d-none">
+                                        <div data-toggle="dropdown">
+                                            <i class="flaticon-381-settings-2" style="font-size:40px"></i>
+                                        </div>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <a class="dropdown-item" href="javascript:void(0);">Update</a>
+                                            <a class="dropdown-item text-danger" href="javascript:void(0);">Delete</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <span class="text-primary d-block mb-3">
+
+                                    Musical Drama Show</span>
+                                <p class="fs-14 text-white font-w200">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                                </p>
+                            </div>
+                            <div
+                                class="media d-md-flex d-block border-bottom pb-sm-4 pb-2 mb-4 text-md-left text-center">
+                                <img src="public/images/card/4.jpg" alt="" width="100%" height="200px"
+                                    class="rounded mr-0 mr-md-4 mb-2 mb-md-0">
+
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-3 col-md-6 col-xxl-6 mb-3">
+                                    <div class="media bgl-primary p-3 rounded align-items-center">
+
+
+                                        <div class="media-body">
+                                            <span class="fs-12 d-block mb-1">Ticket Price</span>
+                                            <span class="fs-18 text-white">$124,00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-6 col-xxl-6 mb-3">
+                                    <div class="media bgl-primary p-3 rounded align-items-center">
+                                        <i class="fas fa-dollar-sign"></i>
+                                        <div class="media-body">
+                                            <span class="fs-12 d-block mb-1">Date</span>
+                                            <span class="fs-18 text-white">Sunday, 12 June 2020</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-5 col-md-12 col-xxl-12">
+                                    <div class="media bgl-primary p-3 rounded align-items-center">
+                                        <i class="fas fa-calendar-week"></i>
+                                        <div class="media-body">
+                                            <span class="fs-12 d-block mb-1">Location</span>
+                                            <span class="fs-18 text-white">Indonesa “Sarbini Hall”</span>
+                                        </div>
+                                        <a href="#">
+                                            <i class="fas fa-street-view"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="card overflow-hidden">
+                        <div class="card-header border-0 pb-0">
+                            <div>
+                                <p class="mb-2 font-w100">Revenue</p>
+                                <h3 class="mb-0 fs-24 font-w600">$124,136</h3>
+                            </div>
+                        </div>
+                        <div class="card-body p-0">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="card overflow-hidden">
+                        <div class="card-header border-0 pb-0">
+                            <div>
+                                <p class="mb-2 font-w100">Ticket Ordered</p>
+                                <h3 class="mb-0 fs-20 font-w600">639 Pcs</h3>
+                            </div>
+                        </div>
+                        <div class="card-body p-0">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card overflow-hidden bg-image bg-danger">
+                        <div class="card-header  border-0">
+                            <div>
+                                <p class="mb-2 font-w100 text-white">Ticket Refunded</p>
+                                <h3 class="mb-0 fs-20 font-w600">25 Left</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+        <div class="col-xl-6 col-xxl-6 col-xs-12 mb-4">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="media-body">
+                                <div class="d-md-flex d-block justify-content-between">
+                                    <h4 class="fs-22">The Story of Danau Toba</h4>
+                                    <div class="dropdown custom-dropdown mb-0 d-md-block d-none">
+                                        <div data-toggle="dropdown">
+                                            <i class="flaticon-381-settings-2" style="font-size:40px"></i>
+                                        </div>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <a class="dropdown-item" href="javascript:void(0);">Update</a>
+                                            <a class="dropdown-item text-danger" href="javascript:void(0);">Delete</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <span class="text-primary d-block mb-3">
+
+                                    Musical Drama Show</span>
+                                <p class="fs-14 text-white font-w200">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                                </p>
+                            </div>
+                            <div
+                                class="media d-md-flex d-block border-bottom pb-sm-4 pb-2 mb-4 text-md-left text-center">
+                                <img src="public/images/card/4.jpg" alt="" width="100%" height="200px"
+                                    class="rounded mr-0 mr-md-4 mb-2 mb-md-0">
+
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-3 col-md-6 col-xxl-6 mb-3">
+                                    <div class="media bgl-primary p-3 rounded align-items-center">
+
+
+                                        <div class="media-body">
+                                            <span class="fs-12 d-block mb-1">Ticket Price</span>
+                                            <span class="fs-18 text-white">$124,00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-6 col-xxl-6 mb-3">
+                                    <div class="media bgl-primary p-3 rounded align-items-center">
+                                        <i class="fas fa-dollar-sign"></i>
+                                        <div class="media-body">
+                                            <span class="fs-12 d-block mb-1">Date</span>
+                                            <span class="fs-18 text-white">Sunday, 12 June 2020</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-5 col-md-12 col-xxl-12">
+                                    <div class="media bgl-primary p-3 rounded align-items-center">
+                                        <i class="fas fa-calendar-week"></i>
+                                        <div class="media-body">
+                                            <span class="fs-12 d-block mb-1">Location</span>
+                                            <span class="fs-18 text-white">Indonesa “Sarbini Hall”</span>
+                                        </div>
+                                        <a href="#">
+                                            <i class="fas fa-street-view"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="card overflow-hidden">
+                        <div class="card-header border-0 pb-0">
+                            <div>
+                                <p class="mb-2 font-w100">Revenue</p>
+                                <h3 class="mb-0 fs-24 font-w600">$124,136</h3>
+                            </div>
+                        </div>
+                        <div class="card-body p-0">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="card overflow-hidden">
+                        <div class="card-header border-0 pb-0">
+                            <div>
+                                <p class="mb-2 font-w100">Ticket Ordered</p>
+                                <h3 class="mb-0 fs-20 font-w600">639 Pcs</h3>
+                            </div>
+                        </div>
+                        <div class="card-body p-0">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card overflow-hidden bg-image bg-danger">
+                        <div class="card-header  border-0">
+                            <div>
+                                <p class="mb-2 font-w100 text-white">Ticket Refunded</p>
+                                <h3 class="mb-0 fs-20 font-w600">25 Left</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div> -->
+
+    </div>
+</div>
+
+{% endblock body %}
+
+{% block script %}
+<script>
+
+    
+function deleteevents(id) {
+        if (window.confirm("Are You Sure to Delete Event")) {
+            $.ajax({
+                url: 'admindeleteevents',
+                type: 'GET',
+                data: {
+                    'id': id,
+
+                },
+                success: function (data) {
+
+
+
+                    window.location.href = "/superadminevent"
+
+
+
+                }
+
+
+
+            });
+
+        }
+
+
+
+    }
+
+
+  
+
+
+
+</script>
+{% endblock script %}

@@ -1,0 +1,99 @@
+{% extends "public/layout/base.html" %}
+{% load static %}
+{% block body %}
+
+
+<div class="single-class ">
+  <div class="row">
+ 
+    <!-- Registration -->
+    <div class="col-md-6 p-0 mx-auto m-0">
+
+      <div class="product-area shopping-area pad90">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="section-title text-center">
+                <div class="title-bar full-width mb20">
+                  <img src="{% static ''%}landing/assets/images/logo/ttl-bar.png" alt="title-img">
+
+                </div>
+                <h3>Nueva Cuenta</h3>
+
+              </div>
+            </div>
+
+          </div>
+
+          <div class="row">
+            <div class="col-md-10 mx-auto text-dark">
+              <form action="/signup" class="sign-up-form" method="POST">
+                {% csrf_token %}
+                <h2 class="title">Nueva Cuenta</h2>
+
+                <div class="form-group">
+                  <label>Nombre</label>
+                  <input type="text" class="form-control" placeholder="Juan Pérez" name="Name" required />
+                </div>
+                
+                <div class="form-group">
+                  <label> Cédula de Identidad </label>
+                  <input type="number" class="form-control" placeholder="1234567" name="Ci" required />
+                </div>
+                <div class="form-group">
+                  <label>RUC</label>
+                  <input type="text" class="form-control" placeholder="1234567-3" name="Ruc"  />
+                </div>
+                <div class="form-group">
+                  <label>Sexo</label>
+                  <select class="form-control" placeholder="Gender" name="Gender" required>
+                    <option value="">Seleccionar</option>
+                    <option value="Male">Masculino</option>
+                    <option value="Female">Femenino</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="">Email</label>
+                  <input type="email" class="form-control" placeholder="juanperez@gmail.com" name="Email" required />
+                </div>
+                <div class="form-group">
+                  <label for="">PIN de 4 dígitos</label>
+                  <input type="number" min="0" max="9999" class="form-control" placeholder="1122" name="Password" required />
+                </div>
+                <div class="form-group">
+                  <label>Número de celular</label>
+                  <input type="text" class="form-control" placeholder="0981123456" name="Phones" required />
+                </div>
+                <div class="form-group">
+                  <label>Dirección</label>
+                  <input type="text" class="form-control" placeholder="Mariscal Lopez 2021 esquina Venezuela" name="Direction" required />
+                </div>
+                <div class="form-group">
+                  <label> Ciudad </label>
+                  <input type="text" class="form-control" placeholder="Asunción" name="City" required />
+                </div>
+                <div class="form-group">
+                  <label> Fecha de nacimiento </label>
+                  <input type="Date" class="form-control" placeholder="Birth_date" name="Birth_date" required />
+                </div>
+
+                <input type="submit" class="btn btn-primary" value="Sign up" />
+
+              </form>
+            </div>
+
+
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+
+  </div>
+
+
+</div>
+{% endblock body %}

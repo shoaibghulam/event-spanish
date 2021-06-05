@@ -1,0 +1,20 @@
+{% extends 'userapp/base.html' %}
+{% load static %}
+{% block body %}
+
+<div class="container ">
+
+    <div class="row text-center">
+        {% for d in data %}
+        <div class="col-lg-4 col-md-6 col-sm-12 mt-4 mb-4">
+            <div class="product-box mt40">
+                <img class="img-fluid" src="{{d.EventId.Event_logo.url}}" style="width:100%; height: 226px;"/>
+                <a class="btn btn-info btn-block" style="color:#fff" href="/eventapp/{{d.EventId.EventId}}">{{d.EventId.EventName}}</a>
+            </div>
+        </div>
+        {% endfor %}
+      
+       
+    </div>
+</div>
+{% endblock body %}

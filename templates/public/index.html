@@ -1,0 +1,190 @@
+{% extends 'public/layout/base.html' %}
+{% load static %}
+{% block body %}
+
+<div class="slider-area1">
+    <div id="rev_slider_1_wrapper" class="rev_slider_wrapper fullscreen-container" data-alias="photography1"
+        style="background-color:transparent;padding:0px;">
+        <div id="rev_slider_1" class="rev_slider fullscreenbanner" style="display:none;" data-version="5.0.7">
+            <ul>
+        {% for slider in slider %}
+                <li data-index="rs-{{ forloop.counter }}" data-transition="slideoververtical">
+
+                    <img src="{{slider.slider_thumb.url}}" alt=""
+                        data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" class="rev-slidebg"
+                        data-no-retina>
+
+                    <div class="tp-caption slide-text-one tp-resizeme" id="slide-1-layer-1"
+                        data-x="['left','center','center','center']" data-hoffset="['65','50','0','0']"
+                        data-y="['middle','middle','middle','middle']" data-voffset="['-100','-145','-60','-100']"
+                        data-fontsize="['inherit','20','20','17']" data-lineheight="['60','30','30','26']"
+                        data-width="none" data-height="none" data-whitespace="nowrap" data-transform_idle="o:1;"
+                        data-transform_in="x:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;s:2000;e:Power4.easeInOut;"
+                        data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;"
+                        data-mask_in="x:-250px;y:0;s:inherit;e:inherit;"
+                        data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;" data-start="500" data-splitin="none"
+                        data-splitout="none" data-responsive_offset="on"
+                        style="z-index: 5; white-space: nowrap; font-family: 'Roboto Condensed', sans-serif">
+                        
+
+
+                        <h1>{{slider.slider_first_word}} <span>{{slider.slider_second_word}}</span></h1>
+                    </div>
+
+                    <div class="tp-caption slide-text-two tp-resizeme" id="slide-1-layer-2"
+                        data-x="['left','left','center','center']" data-hoffset="['65','0','0','0']"
+                        data-y="['middle','middle','middle','middle']" data-voffset="['-0','-80','30','0']"
+                        data-fontsize="['60','60','60','30']" data-lineheight="['60','60','60','40']" data-width="none"
+                        data-height="none" data-whitespace="nowrap" data-transform_idle="o:1;"
+                        data-transform_in="x:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;s:2300;e:Power4.easeInOut;"
+                        data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;"
+                        data-mask_in="x:-200px;y:0;s:inherit;e:inherit;"
+                        data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;" data-start="750" data-splitin="none"
+                        data-splitout="none" data-responsive_offset="on"
+                        style="z-index: 6; white-space: nowrap; font-family: 'Roboto Condensed', sans-serif">
+                        <h1>{{slider.slider_description}}</h1>
+                    </div>
+
+                </li>
+{% endfor %}
+        
+            
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+
+<div class="features-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="features-body">
+                    <div class="features-box text-center">
+                        <div class="features-elements">
+                            <a href="javascript:void(0);"><i class="fa fa flaticon-exercise"></i></a>
+                            <h4 class="mb20">A NEW WAY OF RUNNING
+                            </h4>
+                            <p class="mb20">Transform your workouts into real challenges and discover new goals. We were
+                                born with the mission to motivate you and keep you always moving.</p>
+                        </div>
+                        <div class="features-box-img ">
+                            <a class="primary-overlay" href="#"><img
+                                    src="{% static '' %}landing/assets/images/feature/1.jpg" alt="feature img"></a>
+                        </div>
+                    </div>
+                    <div class="features-box text-center">
+                        <div class="features-elements">
+                            <a href="#"><i class="fa fa flaticon-weightlifting"></i></a>
+                            <h4 class="mb20">fitness</h4>
+                            <p class="mb20">Lorem ipsum dolor sit amet, ei veritus consetetur repudiandae eam, duo ne
+                                homero nostro moderatius.</p>
+                        </div>
+                        <div class="features-box-img">
+                            <a class="primary-overlay" href="#"><img
+                                    src="{% static '' %}landing/assets/images/feature/2.jpg" alt="feature img"></a>
+                        </div>
+                    </div>
+                    <div class="features-box text-center">
+                        <div class="features-elements">
+                            <a href="#"><i class="fa fa flaticon-dumbbell"></i></a>
+                            <h4 class="mb20">weight left</h4>
+                            <p class="mb20">Lorem ipsum dolor sit amet, ei veritus consetetur repudiandae eam, duo ne
+                                homero nostro moderatius.</p>
+                        </div>
+                        <div class="features-box-img ">
+                            <a class="primary-overlay" href="#"><img
+                                    src="{% static '' %}landing/assets/images/feature/3.jpg" alt="feature img"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+<div class="portfolio-area title-white bg1 parallax overlay pad90">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-title text-center">
+                    <div class="title-bar full-width mb20">
+                        <img src="{% static '' %}landing/assets/images/logo/ttl-bar.png" alt="title-img">
+                    </div>
+                    <h3>WIN PRIZES</h3>
+                    <p>Each challenge has an incredible medal so you will always remember the challenges that you were
+                        able to overcome with effort and dedication.</p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+<div class="product-area shopping-area pad90">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="section-title text-center">
+                    <div class="title-bar full-width mb20">
+                        <img src="{% static ''%}landing/assets/images/logo/ttl-bar.png" alt="title-img">
+
+                    </div>
+                    <h3>Active Event</h3>
+                    <p>look your best feel even better</p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+               
+        
+            
+            <div class="site__wrapper">
+                {% for d in data %}
+                <div class="grid">
+                  <div class="card">
+                    <div class="card__image">
+                      <img src="{{d.Event_logo.url}}" style="width:100%" alt="">
+              
+                      <div class="card__overlay card__overlay--blue">
+                        <div class="card__overlay-content">
+                         
+              
+                          <a href="/eventview/{{d.EventId}}" class="card__title">{{d.EventName}}</a>
+              
+                          
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              
+                {% endfor %}
+      
+
+              </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+
+{% endblock body %}
+{% block script %}
+
+  
+{% endblock script %}

@@ -1,0 +1,58 @@
+{% extends 'userapp/base.html' %}
+{% load static %}
+{% block body %}
+<style>
+.dataset{
+  font-size:13px;
+}
+.dataset span{
+  font-size:15px;
+}
+</style>
+<div class="container-fluid">
+  <h1 class="text-center"> Tabla de Clasificación </h1>
+<div style="width:80%; margin:0 auto">
+  <div class="data_tables">
+   <zing-grid class="dataset"  search pager page-size="3" page-size-options="2,3,6"  viewport-stop id="datatable">
+  </zing-grid>
+
+  </div>
+</div>
+   
+</div>
+{% endblock body %}
+{% block script %}
+<script src="https://cdn.zinggrid.com/zinggrid.min.js"></script>
+
+
+<script>
+const zingGridRef = document.querySelector('#datatable');
+
+  var shoaib="";
+var comp="";
+$.ajax({
+  url:'/leaderboarddata',
+  type:'GET',
+  success: function(data){
+    shoaib=data;
+
+    var dataset=eval(data);
+      shoaib = dataset
+      var datalist=[]
+
+  
+     for(x=0;x<dataset.length;x++){
+     // var pre=(mydata.totalrun.meter__sum*100)/mydata.eventdistance;
+      var  pre=(dataset[x].meter*100) / dataset[x].EventId__distance;
+     console.log(pre)
+     datalist.push({'Name':dataset[x].user_id__Name,'progress':pre.toFixed(1)})
+    
+    }
+ 
+    zingGridRef.setAttribute('data', JSON.stringify(datalist));
+    
+
+  }
+})
+</script>
+{% endblock script %}

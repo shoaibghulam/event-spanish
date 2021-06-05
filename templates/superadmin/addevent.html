@@ -1,0 +1,152 @@
+{% extends "superadmin/base.html" %}
+{% block body %}
+{% for message in messages %}
+<div class="alert alert-{{message.tags}} mb-0 alert-dismissible show" role="alert">
+<strong>Message:</strong> {{message}}
+<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+{% endfor %}
+<div class="container-fluid">
+  <div class="row page-titles">
+    <div class="col-sm-6 p-md-0">
+      <div class="welcome-text">
+        <h4>Hola, bienvenido!</h4>
+        <p class="mb-0">Validation</p>
+      </div>
+    </div>
+    <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="javascript:void(0)">Form</a></li>
+        <li class="breadcrumb-item active"><a href="javascript:void(0)">Add Event</a></li>
+      </ol>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+
+        <div class="card-body">
+          <div class="form-validation">
+            <form action="/superadminaddevent" method="POST" enctype="multipart/form-data">
+              {% csrf_token %}
+              <div class="row">
+                <div class="col-xl-12">
+                  <div class="form-group row">
+                    <label class="col-form-label" for="val-username"> Nombre del Evento <span class="text-danger">*</span>
+                    </label>
+                    <div class="col-lg-12">
+                      <input type="text" class="form-control" id="val-username" name="EventName"
+                        placeholder="Mi Evento 100K" required>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-form-label" for="val-email">Costo<span class="text-danger">*</span>
+                    </label>
+                    <div class="col-lg-12">
+                      <input type="number" class="form-control" id="val-email" name="Cost" placeholder="50.000" required>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+
+                    <div class="col-lg-6">
+                      <label class="col-form-label" for="val-email"> Inicio del evento <span class="text-danger">*</span>
+                      </label>
+                      <input type="date" class="form-control" id="Registration_start" name="Registration_start" placeholder="coast.." required>
+                    </div>
+                    <div class="col-lg-6">
+                      <label class="col-form-label" for="val-email"> Fin del evento <span class="text-danger">*</span>
+                      </label>
+                      <input type="date" class="form-control" id="Registration_end" name="Registration_end" placeholder="coast.." required>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+
+                    <div class="col-lg-6">
+                      <label class="col-form-label" for="val-email"> Estado del evento <span class="text-danger">*</span>
+                      </label>
+                      <select name="Status" class="form-control" id="">
+                        <option value="" disabled>Seleccionar</option>
+                        <option value="Active">Activo</option>
+                        <option value="Inactive">Inactivo</option>
+                      </select>
+                    </div>
+                    <div class="col-lg-6">
+                      <label class="col-form-label" for="val-email"> Logo del evento <span class="text-danger">*</span>
+                      </label>
+                      <input type="file" class="form-control" id="val-email" name="Event_logo" placeholder="coast.." required>
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+
+                    <div class="col-lg-12">
+                      <label class="col-form-label" for="val-email">Tipo de evento<span class="text-danger">*</span>
+                      </label>
+                      <select name="EventTypeId" class="form-control" id="">
+                        <option value=""disabled>Seleccionar</option>
+                        {% for d in data %}
+                        <option value="{{d.EventTypeId}}">{{d.EventType}}</option>
+                        {% endfor %}
+                      </select>
+                    </div>
+
+                  </div>
+
+                  <div class="form-group row">
+                    <label class="col-form-label" for="val-suggestions"> Descripción <span class="text-danger">*</span>
+                    </label>
+                    <div class="col-lg-12">
+                      <textarea class="form-control" id="val-suggestions" name="Description" rows="5"
+                        placeholder="Breve descripción del evento" required></textarea>
+                    </div>
+                     <div class="col-md-12">
+                 
+                        <label class="col-form-label" for="val-email"> Distancia <span class="text-danger">*</span>
+                        </label>
+                        <input type="Number" class="form-control" id="buylink" name="buy_link" placeholder="100" required>
+                     
+                    </div>
+                   
+                    <div class="col-lg-12 mt-4 text-center">
+                      <button type="submit" class="btn btn-primary"> Crear evento </button>
+                    </div>
+
+                  </div>
+                </div>
+
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</script>
+{% endblock body %}
+
+{% block script %}
+
+<script>
+var dtToday = new Date();
+
+var month = dtToday.getMonth() + 1;
+var day = dtToday.getDate();
+var year = dtToday.getFullYear();
+if (month < 10)
+    month = '0' + month.toString();
+if (day < 10)
+    day = '0' + day.toString();
+
+var maxDate = year + '-' + month + '-' + day;
+
+$('#Registration_start').attr('min', maxDate);
+$('#Registration_end').attr('min', maxDate);
+</script>
+
+
+{% endblock script %}

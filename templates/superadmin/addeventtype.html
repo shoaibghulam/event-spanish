@@ -1,0 +1,67 @@
+{% extends "superadmin/base.html" %}
+{% block body %}
+{% for message in messages %}
+<div class="alert alert-{{message.tags}} mb-0 alert-dismissible show" role="alert">
+<strong>Message:</strong> {{message}}
+<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+{% endfor %}
+<div class="container-fluid">
+
+  <div class="row page-titles">
+    <div class="col-sm-6 p-md-0">
+      <div class="welcome-text">
+        <h4> Hola, bienvenido!</h4>
+        <p class="mb-0">Validation</p>
+      </div>
+    </div>
+    <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="javascript:void(0)">Formulario</a></li>
+        <li class="breadcrumb-item active"><a href="javascript:void(0)">Agregar tipo de evento</a></li>
+      </ol>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+
+        <div class="card-body">
+          <div class="form-validation">
+            <form action="superadminaddeventtype" method="POST">
+              {% csrf_token %}
+              <div class="row">
+                <div class="col-xl-12">
+                  <div class="form-group row">
+                    <label class="col-form-label" for="val-username"> Tipo de Evento <span class="text-danger">*</span>
+                    </label>
+                    <div class="col-lg-12">
+                      <input type="text" class="form-control" id="val-username" name="EventType"
+                        placeholder="Ingresar tipo de Evento">
+                    </div>
+                  </div>
+
+
+
+
+                  <div class="form-group row">
+
+                    <div class="col-lg-12 mt-4 text-center">
+                      <button type="submit" class="btn btn-primary"> Crear </button>
+                    </div>
+
+                  </div>
+                </div>
+
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+{% endblock body %}

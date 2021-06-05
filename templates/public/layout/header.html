@@ -1,0 +1,109 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{{request.session.title}}</title>
+    <meta name="author" content="iThemesLab">
+    <meta name="description" content="{{request.session.desc}}">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="shortcut icon" href="{{request.session.logo}}">
+    <link rel="icon" href="{{request.session.logo}}">
+
+
+    <link rel="stylesheet" href="{% static '' %}landing/assets/css/vendor/bootstrap.min.css">
+
+    <link rel="stylesheet" href="{% static '' %}landing/assets/css/vendor/rev_slider/settings.css">
+    <link rel="stylesheet" href="{% static '' %}landing/assets/css/vendor/rev_slider/navigation.css">
+
+    <link rel="stylesheet" href="{% static '' %}landing/assets/css/vendor/font-awesome.min.css">
+
+    <link rel="stylesheet" href="{% static '' %}landing/assets/css/vendor/flaticon.css">
+
+    <link rel="stylesheet" href="{% static '' %}landing/assets/css/vendor/owl.carousel.css">
+
+    <link rel="stylesheet" href="{% static '' %}landing/assets/css/vendor/animate.css">
+
+    <link rel="stylesheet" href="{% static '' %}landing/assets/css/vendor/magnific-popup.css">
+
+    <link rel="stylesheet" href="{% static '' %}landing/assets/css/vendor/jquery-ui.min.css">
+
+    <link rel="stylesheet" href="{% static '' %}landing/assets/css/style.css">
+
+    <link rel="stylesheet" href="{% static '' %}landing/assets/css/responsive.css">
+
+    <script src="{% static '' %}landing/assets/js/vendor/modernizr-2.8.3.min.js"></script>
+
+</head>
+
+<body>
+
+    <div class="main-container">
+
+        <header class="header fixed-top">
+            <nav class="navbar navbar-expand-lg navbar-dark">
+                <div class="container">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="/"><img
+                                src="{{request.session.logo}}" style="width:97px; height:75px" alt="BEFIT logo"></a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse"
+                            data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
+                            aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                    </div>
+                    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item  active">
+                                <a class="nav-link " href="/">
+                                    home<span class="sr-only">(current)</span>
+                                </a>
+
+                            </li>
+                            <li class="nav-item  ">
+                                <a class="nav-link " href="/contact">
+                                    Contact Us<span class="sr-only">(current)</span>
+                                </a>
+
+                            </li>
+                            <li class="nav-item  ">
+                                <a class="nav-link " href="/events">
+                                    event<span class="sr-only">(current)</span>
+                                </a>
+                            {% if request.session.user_id %}
+                            <li class="nav-item  ">
+                                <a class="nav-link " href="/myevent">
+                                    My Event<span class="sr-only">(current)</span>
+                                </a>
+
+                            </li>
+                            <li class="nav-item  ">
+                                <a class="nav-link " href="/logout">
+                                    Logout<span class="sr-only">(current)</span>
+                                </a>
+
+                            </li>
+                            {% else %}
+                             <li class="nav-item  ">
+                                <a class="nav-link " href="/clientlogin">
+                                    Login <span class="sr-only">(current)</span>
+                                </a>
+
+                            </li>
+                             <li class="nav-item  ">
+                                <a class="nav-link " href="/signup">
+                                    Singup <span class="sr-only">(current)</span>
+                                </a>
+
+                            </li>
+                            {% endif %}
+                            
+
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>

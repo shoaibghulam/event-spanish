@@ -1,0 +1,146 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Victoria - Desafios Vituales</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="{% static '' %}landing/img/favicon.png" rel="icon">
+  <link href="{% static '' %}landing/img/favicon.png" rel="vd-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static '' %}landing/vendor/aos/aos.css" rel="stylesheet">
+  <link href="{% static '' %}landing/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="{% static '' %}parsley.min.js" rel="stylesheet">
+  <link href="{% static '' %}landing/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="{% static '' %}landing/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="{% static '' %}landing/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="{% static '' %}landing/css/style.css" rel="stylesheet">
+
+  <!-- =======================================================
+    
+  ======================================================== -->
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top d-flex align-items-center">
+    <div class="container d-flex justify-content-between align-items-center">
+
+
+      <div class="logo float-left">
+        <!-- Uncomment below if you prefer to use an text logo -->
+        <!-- <h1><a href="index.html">NewBiz</a></h1> -->
+        <a href="/"><img src="{{request.session.logo}}" alt=""></a>
+      </div>
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="active " href="/">Home</a></li>
+          <li><a href="/contact">Contacto</a></li>
+          <li><a href="/events">Eventos</a></li>
+            {% if request.session.user_id %}
+          <li><a href="/myevent"> My Event</a></li>
+          <li><a href="/logout"> Logout</a></li>
+          {% else %}
+          <li><a href="/clientlogin"> Login</a></li>
+          <li><a href="/signup"> Sign up</a></li>
+          {% endif %}
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+
+
+
+
+  <!-- Contenido -->
+    {%block content%}
+    
+    {%endblock%}
+
+
+
+
+
+
+  <!-- ======= Footer ======= -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 mb-4 mb-md-0">
+          <h3>Sobre nosotros</h3>
+          <p>Somos una idea que nace en el año 2019 con la intención de colocarnos como la primera empresa de corridas virtuales en Paraguay, 
+            sin embargo, este proyecto comienza a tomar vida en el año 2020 durante el inicio de la pandemia (Coronavirus) para ofrecer una alternativa
+          al confinamiento, a mantenernos siempre activos y a no perder la esperanza.</p>
+          <p class="social">
+            <a href="https://facebook.com/victoriadesafios"><span class="bi bi-facebook"></span></a>
+            <a href="https://instagram.com/victoria.desafios"><span class="bi bi-instagram"></span></a>
+          </p>
+        </div>
+        <div class="col-md-7 ms-auto">
+          <div class="row site-section pt-0">
+            <div class="col-md-4 mb-4 mb-md-0">
+              <h3>Navegación</h3>
+              <ul class="list-unstyled">
+                <li><a href="#eventos">Eventos</a></li>
+                <li><a href="/contact">Contacto</a></li>
+              </ul>
+            </div>
+            <div class="col-md-4 mb-4 mb-md-0">
+              <h3>Partners</h3>
+              <ul class="list-unstyled">
+                <li><a href="https://marketingonlinepy.com">FMarketing Online</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row justify-content-center text-center">
+        <div class="col-md-7">
+          <p class="copyright">&copy; Copyright Victoria Desafios 2020. All Rights Reserved</p>
+          <div class="credits">
+            <!--
+            
+          -->
+            Powered by <a href="https://marketingonlinepy.com/">FMarketing Online</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="{% static '' %}landing/vendor/aos/aos.js"></script>
+  <script src="{% static '' %}landing/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  {% comment %} <script src="{% static '' %}landing/vendor/php-email-form/validate.js"></script> {% endcomment %}
+  <script src="{% static '' %}landing/vendor/swiper/swiper-bundle.min.js"></script>
+
+
+  <!-- Template Main JS File -->
+    <script src="{% static '' %}jquery-3.4.1.min.js"></script>
+  <script src="{% static '' %}parsley.min.js"></script>
+  <script src="{% static '' %}landing/js/main.js"></script>
+  {% block script %}{% endblock script %}
+
+</body>
+
+</html>

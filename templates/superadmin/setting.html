@@ -1,0 +1,180 @@
+{% extends "superadmin/base.html" %}
+{% block body %}
+<div class="container-fluid">
+    <div class="page-titles">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active"><a href="javascript:void(0)">Usuario</a></li>
+            <li class="breadcrumb-item"><a href="javascript:void(0)">Lista de usuarios</a></li>
+        </ol>
+    </div>
+  
+    {% for message in messages %}
+    <div class="alert alert-{{message.tags}} mb-0 alert-dismissible  show" role="alert">
+        <strong>Atención:</strong> {{message}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+{% endfor %}
+    <div class="row">
+        <div class="col-lg-12">
+          
+        <div class="row">
+            <div class="col-md-8 mx-auto">
+                <h1>Website Setting</h1>
+            <form action="{% url 'superadminsetting' %}" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                <div class="form-group">
+                    <label >Titulo del website</label>
+                    <input type="text" name="title" class="form-control" placeholder="Enter Website title" value="{{data.website_title}}" required>
+                </div>
+                
+                
+                <div class="form-group">
+                    <label >Descripcion del Website</label>
+                    <textarea type="text" name="desc" class="form-control" placeholder="Enter Website title" required>{{data.website_description}}</textarea>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-8 mt-4">
+                            <label >Logo del Website</label>
+                            <input type="file" name="logo" class="form-control" placeholder="Enter Website title"  >
+                          <div class="text-center mt-4">
+
+                              <input type="submit" class="btn btn-primary" value="Update" >
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                            <img class="img-fluid" src={{data.website_logo.url}}/>
+                        </div>
+                    </div>
+                  
+                    
+                </div>
+            </form>
+            </div>
+           
+        </div>
+        </div>
+    </div>
+    <!-- slider start -->
+    <div class="row" >
+        <div class="col-md-12 text-center" style="margin:100px 0;">
+            <h1>Slider</h1>
+            <button class="btn btn-outline-primary float-right" data-toggle="modal" data-target=".bd-example-modal-lg">Update Slide</button>
+        </div>
+       
+            <!-- slider card start -->
+            
+
+
+
+
+
+
+
+
+          
+              
+            
+        <div class="col-xl-6 mx-auto">
+            <div class="card mb-3">
+            <img class="card-img-top mx-auto img-fluid" src="{{slider.background.url}}"  style="height:400px; width:90%" alt="Card image cap">
+            <img class="card-img-top mx-auto mt-4 img-fluid" src="{{slider.front_img.url}}" style="height:200px; width:50%"alt="Card image cap">
+            <div class="card-header">
+            <h5 class="card-title">{{slider.title}}</h5>
+            </div>
+            <div class="card-body">
+            <p class="card-text">{{slider.desc}}</p>
+            <p class="card-text">Button Name: {{slider.button_name}}<br>Button Link: {{slider.button_link}}</p>
+         
+            </div>
+            </div>
+            </div>
+         
+            <!-- slider card end -->
+    </div>
+    <!-- slider insert Modal start -->
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+        <div class="modal-header">
+        <h5 class="modal-title">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+        </button>
+        </div>
+        <div class="modal-body">
+            <form action="{% url 'adminslider' %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-6">
+
+
+
+
+                        <label >title</label>
+                        <input type="hidden" name="pk"   value="{{slider.slider_id}}"required>
+                        <input type="text" name="title" class="form-control" placeholder="Enter Website title"  value="{{slider.title}}"required>
+    
+                    </div>
+                    <div class="col-md-6">
+                        <label >Button Name</label>
+                        <input type="text" name="btnname" class="form-control" placeholder="Enter Website title"  value="{{slider.button_name}}" required>
+    
+                    </div>
+                    <div class="col-md-12">
+                        <label >Button Link</label>
+                        <input type="text" name="btnlink" class="form-control" placeholder="Enter Website title"  value="{{slider.button_link}}" required>
+    
+                    </div>
+              
+                </div>
+            </div>
+            
+            
+            <div class="form-group">
+                <label >slider Description</label>
+                <textarea type="text" name="desc" class="form-control" placeholder="Enter Website title" required>{{slider.desc}}</textarea>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-6 mt-4">
+                        <label >Slider Background</label>
+                        <input type="file" name="back" class="form-control" placeholder="Enter Website title"  >
+                      
+                    </div>
+                    <div class="col-md-6 mt-4">
+                        <label >Slider Front</label>
+                        <input type="file" name="thumb" class="form-control" placeholder="Enter Website title"  >
+                      
+                    </div>
+                   
+                </div>
+              
+                
+            </div>
+     
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-danger light" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+    </form>
+        </div>
+        </div>
+        </div>
+        </div>
+    <!-- slider insert Modal end-->
+    <!-- slider end -->
+    
+</div>
+
+
+{% endblock body %}
+
+{% block script %}
+<script>
+
+
+</script>
+{% endblock script %}

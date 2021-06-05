@@ -1,0 +1,50 @@
+{% extends 'userapp/base.html' %}
+{% load static %}
+{% block body %}
+<style>
+   .card-date{ position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0 9px;
+    background: linear-gradient(to right, #f48204 0%, #ffc100 100%);
+    font-size:20px;
+    color:#fff;
+   }
+   .d-block{
+       margin:0;
+       padding:0;
+   }
+    .c-link{
+        padding: 30px;
+    color: #f48204 !important;
+    font-size: 22px;
+    }
+</style>
+<div class="container-fluid ">
+    {% for message in messages %}
+    <div class="alert alert-{{message.tags}} mb-0 alert-dismissible show" role="alert">
+        <strong>Atención:</strong> {{message}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% endfor %}
+    <div class="row mt-4">
+        <!-- Column -->
+        {% for d in data %}
+        <div class="col-md-4 text-center ">
+          <div class="card border-0 mb-4" >
+            <a href="/eventview/{{d.EventId}}"><img class="card-img-top" style="width:100%; "src="{{d.Event_logo.url}}" alt="wrappixel kit"></a>
+            <div class="card-date">{{d.created|date:"F"  }}<p class="d-block">{{d.created.day}}</p></div>
+            <h5 class="font-weight-medium "><a href="#" class="c-link">{{d.EventName}}</a></h5>
+            <p class="">{{d.Description}}</p>
+            <a href="/eventview/{{d.EventId}}" class="text-decoration-none linking text-themecolor text-center">Más Información</a> 
+          </div>
+        </div>
+        {% endfor %}
+     
+      </div>
+    </section>
+
+</div>
+{% endblock body %}

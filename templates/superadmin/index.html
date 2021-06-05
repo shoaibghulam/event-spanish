@@ -1,0 +1,183 @@
+{% extends 'superadmin/base.html' %}
+{% load static %}
+{% block body %}
+<div class="container-fluid">
+    {% for message in messages %}
+    <div class="alert alert-{{message.tags}} mb-0 alert-dismissible show" role="alert">
+        <strong>Message:</strong> {{message}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% endfor %}
+    <div class="row">
+
+        <div class="col-xl-12 col-xxl-12 col-lg-12">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="card overflow-hidden">
+                        <div class="mt-4 text-center align-items-start pb-0 border-0">
+                            <div class="text-center">
+                                <span class="fs-16">Number of Users</span>
+                                <h1 class="fs-29 mb-0">{{user}}</h1>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    
+                </div>
+                <div class="col-sm-4">
+                    <div class="card overflow-hidden">
+                        <div class="mt-4 text-center align-items-start pb-0 border-0">
+                            <div class="text-center">
+                                <span class="fs-16">Number of Events</span>
+                                <h1 class="fs-29 mb-0">{{event}}</h1>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    
+                </div>
+                <div class="col-sm-4">
+                    <div class="card overflow-hidden">
+                        <div class="mt-4 text-center align-items-start pb-0 border-0">
+                            <div class="text-center">
+                                <span class="fs-16">Number of Events Register</span>
+                                <h1 class="fs-29 mb-0">{{userregister}}</h1>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    
+                </div>
+                <!-- <div class="col-sm-6">
+                    <div class="card overflow-hidden">
+                        <div class="card-header align-items-start pb-0 border-0">
+                            <div>
+                                <h4 class="fs-16 mb-0">Increase 25%</h4>
+                                <span class="fs-12">Comparisson</span>
+                            </div>
+
+                        </div>
+                        <div class="card-body p-0">
+                            <canvas id="widgetChart2" height="60"></canvas>
+                        </div>
+                    </div>
+                </div> -->
+                <!-- <div class="col-sm-3">
+                    <div class="card overflow-hidden">
+                        <div class="mt-4 text-center align-items-start pb-0 border-0">
+                            <div class="text-center">
+                                <h1 class="fs-29 mb-0">451,509$</h1>
+                                <span class="fs-16"></span>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div> -->
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-xxl-4 col-md-6">
+            <div class="card">
+                <div class="card-header border-0 pb-0">
+                    <h4 class="fs-20">Latest User</h4>
+                    <div class="dropdown custom-dropdown mb-0">
+
+                        <!-- <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" href="javascript:void(0);">Details</a>
+                            <a class="dropdown-item text-danger" href="javascript:void(0);">Cancel</a>
+                        </div> -->
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="media pb-3 border-bottom mb-3 align-items-center">
+                        <span class="ticket-icon mr-3 bg-primary">
+                            <i class="fa fa-ticket fa-2x text-white"></i>
+                        </span>
+                        {% for l in latestuser %}
+                        <div class="media-body">
+                            <h6 class="fs-16 mb-0">{{l.user_id}}</h6>
+                            <div class="d-flex">
+                                <span class="fs-14 mr-auto">{{l.EventId}}</span>
+                                <!-- <span class="fs-14">2m ago</span> -->
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-9 col-xxl-8">
+            <div class="card event-bx">
+                <div class="card-header border-0 pb-0">
+                    <h4 class="fs-20">Recent Event List</h4>
+                    <div class="dropdown custom-dropdown mb-0">
+                        <!-- <div data-toggle="dropdown">
+                            <i class="fa fa-cog"></i>
+                        </div> -->
+                        <!-- <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" href="javascript:void(0);">Details</a>
+                            <a class="dropdown-item text-danger" href="javascript:void(0);">Cancel</a>
+                        </div> -->
+                    </div>
+                </div>
+                <div class="card-body dz-scroll" id="event-bx">
+                    {% for e in eventlist %}
+                    <div class="media d-md-flex d-block pb-3 border-bottom mb-3">
+                        <div class="image">
+                            <img src="{{e.Event_logo.url}}" alt="">
+                            <!-- <i class="las la-film image-icon"></i> -->
+                        </div>
+                        <div class="media-body">
+                            <h4 class="fs-18 mb-sm-0 mb-2"><a href="javascript.html"> {{e.EventName}}</a></h4>
+                            <span class="fs-14 d-block mb-sm-3 mb-2 text-primary">{{e.EventTypeId}}</span>
+                            <p class="fs-12">{{e.Description}}</p>
+                        </div>
+                        <div class="media-footer">
+                            <div class="text-center">
+                                <span class="ticket-icon bgl-primary mb-3">
+                                    <svg width="14" height="25" viewBox="0 0 14 25" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M6.07438 25H7.95454V22.6464C11.8595 22.302 14 19.6039 14 16.8197C14 12.7727 10.8471 11.9977 7.95454 11.3088V5.10907C9.34297 5.4535 10.1529 6.5155 10.2686 7.66361H13.7975C13.5372 4.42021 11.281 2.61194 7.95454 2.32492V0H6.07438V2.35362C2.4876 2.66935 0 4.87945 0 8.09415C0 12.1412 3.18182 12.9449 6.07438 13.6625V19.977C4.45455 19.69 3.64463 18.628 3.52893 17.1929H0C0 20.4363 2.54545 22.3594 6.07438 22.6751V25ZM10.6736 16.992C10.6736 18.4845 9.69008 19.69 7.95454 19.977V14.1504C9.51653 14.6383 10.6736 15.3559 10.6736 16.992ZM3.35537 7.92193C3.35537 6.17107 4.48347 5.22388 6.07438 5.02296V10.8209C4.5124 10.333 3.35537 9.58668 3.35537 7.92193Z"
+                                            fill="white" />
+                                    </svg>
+                                </span>
+                                <div class="fs-12 text-white">PYG {{e.Cost}}</div>
+                            </div>
+                            <div class="text-center">
+                                <span class="ticket-icon bgl-primary mb-3">
+                                    <svg width="28" height="28" viewBox="0 0 28 28" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M11.9042 5.18413L0.556031 16.5323C0.281453 16.8068 0.281453 17.2521 0.556031 17.5266L3.24911 20.2197C3.44481 20.4154 3.73705 20.4781 3.99582 20.3799C5.0289 19.9878 6.20067 20.2386 6.98098 21.0189C7.76129 21.7992 8.01214 22.971 7.62003 24.0041C7.52178 24.2628 7.5845 24.5551 7.78019 24.7508L10.4733 27.4439C10.7479 27.7185 11.1931 27.7185 11.4677 27.4439L22.8158 16.0958L11.9042 5.18413Z"
+                                            fill="white" />
+                                        <path
+                                            d="M27.4439 10.4734L24.7508 7.78025C24.5551 7.58456 24.2628 7.52185 24.0041 7.62009C22.971 8.0122 21.7993 7.76132 21.019 6.98101C20.2386 6.2007 19.9878 5.02893 20.3799 3.99585C20.4781 3.73711 20.4154 3.44484 20.2197 3.24914L17.5266 0.556062C17.252 0.281484 16.8068 0.281484 16.5322 0.556062L12.8985 4.18975L23.8102 15.1014L27.4439 11.4677C27.7185 11.1932 27.7185 10.7479 27.4439 10.4734Z"
+                                            fill="white" />
+                                    </svg>
+                                </span>
+                                <div class="fs-12 text-white">{{e.Registration_start}}</div>
+                            </div>
+                            <div class="text-center">
+                                <span class="ticket-icon bgl-primary mb-3">
+
+                                </span>
+                                <div class="fs-12 text-white">{{e.Registration_end}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+             
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock body %}

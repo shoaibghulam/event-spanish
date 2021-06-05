@@ -1,0 +1,214 @@
+{% extends 'userapp/base.html' %}
+{% load static %}
+{% block body %}
+<style>
+  .value{
+    font-size:30px;
+  }
+</style>
+<div class="container-fluid">
+     {% for message in messages %}
+    <div class="alert alert-{{message.tags}} mb-0 alert-dismissible show" role="alert">
+        <strong>Message:</strong> {{message}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% endfor %}
+    <div class="row">
+         <div class="col-sm-12 col-md-12">
+       
+                <div class="card small bar-chart">
+                  <div class="card-header">
+                    <div class="card-title"> Progreso </div>
+                  </div>
+                  <div class="card-content text-center">
+                    <div id="chart"></div>
+                    <!-- <canvas id="mychart" style="height:400px;"></canvas> -->
+                
+                  </div>
+                </div>
+              </div>
+
+    </div> 
+    
+</div>
+{% endblock body %}
+{% block script %}
+
+<script>
+var dataset=[];
+var label=[]
+var userdata=[];
+ var xmlhttp = new XMLHttpRequest();
+
+    xmlhttp.onreadystatechange = function() {
+        if (xmlhttp.readyState == XMLHttpRequest.DONE) {   // XMLHttpRequest.DONE == 4
+           if (xmlhttp.status == 200) {
+              var mydata = JSON.parse(xmlhttp.responseText);
+              var alldata= mydata.data;
+              console.log("the all data is ",alldata.length)
+              // var userdata = eval(xmlhttp.responseText);
+              //console.log(userdata);
+              var pre=(mydata.totalrun.meter__sum*100)/mydata.eventdistance;
+              // alert(pre)
+              update(pre);
+       for(x=0;x<alldata.length;x++){
+       
+         var  kcal=(alldata[x].meter/1000) * alldata[x].weight *1.036
+        //  console.log("push is ",alldata[x].date)
+         dataset.push(kcal)
+         label.push(alldata[x].date)
+       }
+       progressChart(dataset,label)
+            //console.log("set is here,", xmlhttp.responseText[0])
+           }
+           else if (xmlhttp.status == 400) {
+              alert('There was an error 400');
+           }
+           else {
+               alert('something else other than 200 was returned');
+           }
+        }
+    };
+
+    xmlhttp.open("GET", "/userprogress", true);
+    xmlhttp.send();
+ const progressChart=(data,label)=>{
+   
+   var ctx = document.getElementById("mychart");
+                var myChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels:label,
+                        datasets: [
+                          
+                            {
+                                label: "Calories Burned",
+                                borderColor: "#009688",
+                                borderWidth: "1",
+                                backgroundColor: "#F29C10",
+                                pointHighlightStroke: "#009688",
+                                data: dataset,
+                            }
+                        ]
+                    },
+                    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        tooltips: {
+            mode: 'point',
+            intersect: false,
+        },
+          scales: {
+              yAxes: [{
+                  ticks: {
+                      beginAtZero: true
+                  }
+                  
+              }]
+          }
+      }
+                });
+                
+ }
+
+ // chart 2
+ var size = 150,
+    thickness = 60;
+
+var color = d3.scale.linear()
+    // .domain([0, 50, 100])
+    // .range(['#db2828', '#fbbd08', '#21ba45']);
+.domain([0, 17, 33, 50, 67, 83, 100])
+.range(['#db4639', '#db7f29', '#d1bf1f', '#92c51b', '#48ba17', '#12ab24', '#0f9f59']);
+
+var arc = d3.svg.arc()
+    .innerRadius(size - thickness)
+    .outerRadius(size)
+    .startAngle(-Math.PI / 2);
+
+var svg = d3.select('#chart').append('svg')
+    .attr('width', size * 2)
+    .attr('height', size + 20)
+    .attr('class', 'gauge');
+
+var chart = svg.append('g')
+    .attr('transform', 'translate(' + size + ',' + size + ')')
+
+var background = chart.append('path')
+    .datum({
+        endAngle: Math.PI / 2
+    })
+    .attr('class', 'background')
+    .attr('d', arc);
+
+var foreground = chart.append('path')
+    .datum({
+        endAngle: -Math.PI / 2
+    })
+    .style('fill', '#db2828')
+    .attr('d', arc);
+
+var value = svg.append('g')
+    .attr('transform', 'translate(' + size + ',' + (size * .9) + ')')
+    .append('text')
+    .text(0)
+    .attr('text-anchor', 'middle')
+    .attr('class', 'value');
+
+var scale = svg.append('g')
+    .attr('transform', 'translate(' + size + ',' + (size + 15) + ')')
+    .attr('class', 'scale');
+
+scale.append('text')
+    .text(100)
+    .attr('text-anchor', 'middle')
+    .attr('x', (size - thickness / 2));
+
+scale.append('text')
+    .text(0)
+    .attr('text-anchor', 'middle')
+    .attr('x', -(size - thickness / 2));
+
+// setInterval(function() {
+//     update(Math.random() * 100);
+// }, 1500);
+
+function update(v) {
+    v = d3.format('.1f')(v);
+    foreground.transition()
+        .duration(750)
+        .style('fill', function() {
+            return color(v);
+        })
+        .call(arcTween, v);
+
+    value.transition()
+        .duration(750)
+        .call(textTween, v);
+}
+
+function arcTween(transition, v) {
+    var newAngle = v / 100 * Math.PI - Math.PI / 2;
+    transition.attrTween('d', function(d) {
+        var interpolate = d3.interpolate(d.endAngle, newAngle);
+        return function(t) {
+            d.endAngle = interpolate(t);
+            return arc(d);
+        };
+    });
+}
+
+function textTween(transition, v) {
+    transition.tween('text', function() {
+        var interpolate = d3.interpolate(this.innerHTML, v),
+            split = (v + '').split('.'),
+            round = (split.length > 1) ? Math.pow(10, split[1].length) : 1;
+        return function(t) {
+            this.innerHTML = d3.format('.1f')(Math.round(interpolate(t) * round) / round) + '<tspan>%</tspan>';
+        };
+    });
+}
+</script>
+{% endblock script %}

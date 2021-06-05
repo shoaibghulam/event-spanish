@@ -1,0 +1,173 @@
+{% extends "superadmin/base.html" %}
+{% block body %}
+{% for message in messages %}
+<div class="alert alert-{{message.tags}} mb-0 alert-dismissible show" role="alert">
+<strong>Message:</strong> {{message}}
+<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+{% endfor %}
+<div class="container-fluid">
+  <div class="row page-titles">
+    <div class="col-sm-6 p-md-0">
+      <div class="welcome-text">
+        <h4>Hi, welcome back!</h4>
+        <p class="mb-0">Validation</p>
+      </div>
+    </div>
+    <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="javascript:void(0)">Form</a></li>
+        <li class="breadcrumb-item active"><a href="javascript:void(0)">Edit Event</a></li>
+      </ol>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+
+        <div class="card-body">
+          <div class="form-validation">
+           
+            <form action="/superadmineditevent/{{data.EventId}}" method="POST" enctype="multipart/form-data">
+              {% csrf_token %}
+              <div class="row">
+                <div class="col-xl-12">
+                  <div class="form-group row">
+                    <label class="col-form-label" for="val-username">Event Name <span class="text-danger">*</span>
+                    </label>
+                    <div class="col-lg-12">
+                      <input type="text" class="form-control" id="val-username" name="EventName" value="{{data.EventName}}"
+                        placeholder="Enter a Event Name.." required>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-form-label" for="val-email">Event Cost <span class="text-danger">*</span>
+                    </label>
+                    <div class="col-lg-12">
+                      <input type="text" class="form-control" value="{{data.Cost}}" id="val-email" name="Cost" placeholder="cost.." required>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+
+                    <div class="col-lg-6">
+                      <label class="col-form-label" for="val-email">Event Start Date <span class="text-danger">*</span>
+                      </label>
+                      <input type="date" class="form-control" id="Registration_start" name="Registration_start" placeholder="coast.." required>
+                    </div>
+                    <div class="col-lg-6">
+                      <label class="col-form-label"  for="val-email">Event End Date <span class="text-danger">*</span>
+                      </label>
+                      <input type="date"  class="form-control" id="Registration_end" name="Registration_end" placeholder="coast.." required>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+
+                    <div class="col-lg-6">
+                      <label class="col-form-label" for="val-email">Event status<span class="text-danger">*</span>
+                      </label>
+                      <select name="Status" class="form-control"  id="Status">
+                        <option value="" disabled>Select status</option>
+                        <option value="Active">Active</option>
+                        <option value="Inactive">Inactive</option>
+                      </select>
+                    </div>
+                    <div class="col-lg-6">
+                      <label class="col-form-label" for="val-email">Event logo <span class="text-danger">*</span>
+                      </label>
+                      <input type="file" class="form-control" id="val-email" name="Event_logo" placeholder="coast..">
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+
+                    <div class="col-lg-12">
+                      <label class="col-form-label" for="val-email">Event Type<span class="text-danger">*</span>
+                      </label>
+                      <select name="EventTypeId" class="form-control" id="eventtypeid">
+                        <option value=""disabled>Select Type</option>
+                        {% for e in event_data %}
+                        
+                        <option value="{{e.EventTypeId}}">{{e.EventType}}</option>
+                        {% endfor %}
+                      </select>
+                    </div>
+
+                  </div>
+
+                  <div class="form-group row">
+                    <label class="col-form-label" for="val-suggestions">Description <span class="text-danger">*</span>
+                    </label>
+                    <div class="col-lg-12">
+                      <textarea class="form-control" id="val-suggestions" name="Description" rows="5"
+                        placeholder="What would you like to see?"  required>{{data.Description}}</textarea>
+                    </div>
+                    <div class="col-lg-12 mt-4 text-center">
+                      <button type="submit" class="btn btn-primary">Insert </button>
+                    </div>
+
+                  </div>
+                </div>
+
+              </div>
+            </form>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<script>
+var now = new Date('{{data.Registration_start}}')
+var month = (now.getMonth() + 1);               
+var day = now.getDate();
+if (month < 10) 
+    month = "0" + month;
+if (day < 10) 
+    day = "0" + day;
+var today = now.getFullYear() + '-' + month + '-' + day;
+document.getElementById('Registration_start').value = today
+
+
+var now = new Date('{{data.Registration_end}}')
+var month = (now.getMonth() + 1);               
+var day = now.getDate();
+if (month < 10) 
+    month = "0" + month;
+if (day < 10) 
+    day = "0" + day;
+var today = now.getFullYear() + '-' + month + '-' + day;
+document.getElementById('Registration_end').value = today
+
+
+
+
+Status = document.getElementById('Status').value = ('{{data.Status}}');
+eventtypeid = document.getElementById('eventtypeid').value = ('{{data.EventTypeId}}');
+
+
+
+
+</script>
+
+<script>
+  var dtToday = new Date();
+  
+  var month = dtToday.getMonth() + 1;
+  var day = dtToday.getDate();
+  var year = dtToday.getFullYear();
+  if (month < 10)
+      month = '0' + month.toString();
+  if (day < 10)
+      day = '0' + day.toString();
+  
+  var maxDate = year + '-' + month + '-' + day;
+  
+  $('#Registration_start').attr('min', maxDate);
+  $('#Registration_end').attr('min', maxDate);
+  </script>
+
+{% endblock body %}

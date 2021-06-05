@@ -1,0 +1,103 @@
+{% extends "userapp/base.html" %}
+{% block body %}
+{% load static %}
+<div class="container-fluid " >
+
+    <div style="margin: auto; width: 87%;  margin-top: 39px;">
+      {% for message in messages %}
+    <div class="alert alert-{{message.tags}} mb-0 alert-dismissible show" role="alert">
+        <strong>Atención:</strong> {{message}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% endfor %}
+      <form action="/uploadprogress" method="POST" >
+        {% csrf_token %}
+        <div class="form-group row">
+  
+          <div class="col-lg-6">
+            <label class="col-form-label" for="val-email"> ¿Cuándo corriste? <span class="text-danger">*</span>
+            </label>
+            <input type="date" class="form-control" id="date" name="date" required>
+          </div>
+          <div class="col-lg-6">
+            <label class="col-form-label" for="val-email"> ¿Cuál fue tu tiempo? <span
+                class="text-danger">*</span>
+            </label>
+            <div class="row">
+              <div class="col-md-3 col-sm-3 col-xs-3">
+                <input type="number" min="0" max="24" name="HH" class="form-control" placeholders="HH">
+              </div>
+              <div class="col-md-1 col-sm-1 col-xs-1"><b style="font-size:25px">:</b></div>
+              <div class="col-md-3 col-sm-3 col-xs-3">
+                <input type="number" min="0" max="60" name="MM" class="form-control" placeholders="MM">
+              </div>
+              <div class="col-md-1 col-sm-1 col-xs-1"><b style="font-size:25px">:</b></div>
+              <div class="col-md-3 col-sm-3 col-xs-3">
+                <input type="number" min="0" max="60" name="SS" class="form-control" placeholders="SS">
+              </div>
+            </div>
+            <b>Formato: HH:MM:SS</b>
+          </div>
+        </div>
+        <div class="form-group row">
+  
+          <div class="col-lg-6">
+            <label class="col-form-label" for="val-email"> ¿Cuantos kilómetros hiciste? <span
+                class="text-danger">*</span>
+            </label>
+            <input type="number" min="0" max="300 " class="form-control"  step="0.01" id="Registration_start" name="weather"
+              placeholder="EJEMPLO: 10" required>
+          </div>
+          <div class="col-lg-6">
+            <label class="col-form-label" for="val-email"> ¿Cuál es tu peso actual? <span
+                class="text-danger">*</span>
+            </label>
+            <input type="number" min="0" max="500" class="form-control" id="Registration_end" step="0.01" name="weight"
+              placeholder="EJEMPLO: 68" title="your weight must be less then or equal to 50 "required>
+          </div>
+        </div>
+
+
+        <div class="form-group row">
+        
+        
+          <div class="col-lg-12 mt-4 text-center">
+            <br><br>
+            <button type="submit" class="btn btn-primary"> Cargar </button>
+          </div>
+
+        </div>
+        
+            </form>
+            
+        
+    </div>
+</div>
+{% endblock body %}
+{% block script %}
+{% comment %} <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script> {% endcomment %}
+
+<script>
+  $(document).ready(function(){
+    alert("one")
+    $('#timepicker').mdtimepicker(); //Initializes the time picker
+  });
+</script>
+<script>
+
+var date= new Date();
+var month= date.getMonth();
+var year= date.getFullYear();
+var day= date.getDate();
+var fulld=``;
+function getDate(){
+    var today = new Date();
+
+document.getElementById("date").value = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
+
+
+}
+</script>
+{% endblock script %}

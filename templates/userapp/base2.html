@@ -1,0 +1,104 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>SuperAdmin</title>
+    <meta name="description" content="Some description for the page" />
+    <link rel="icon" type="image/png" sizes="16x16" href="public/images/favicon.png">
+    <link href="{% static '' %}public/vendor/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet"
+        type="text/css" />
+    <link href="{% static '' %}public/vendor/owl-carousel/owl.carousel.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.lineicons.com/2.0/LineIcons.css" rel="stylesheet" type="text/css" />
+    <link href="{% static '' %}public/css/style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <div id="preloader">
+        <div class="sk-three-bounce">
+            <div class="sk-child sk-bounce1"></div>
+            <div class="sk-child sk-bounce2"></div>
+            <div class="sk-child sk-bounce3"></div>
+        </div>
+    </div>
+    <div id="main-wrapper">
+        <div class="nav-header">
+            <a href="/myevent" class="brand-logo">
+                <img class="logo-abbr" src="{% static '' %}public/images/logo.png" alt="">
+                <img class="logo-compact" src="{% static '' %}public/images/logo-text.png" alt="">
+                <img class="brand-title" src="{% static '' %}public/images/logo-text.png" alt="">
+            </a>
+            <div class="nav-control">
+                <div class="hamburger">
+                    <span class="line"></span><span class="line"></span><span class="line"></span>
+                </div>
+            </div>
+        </div>
+  
+        <div class="deznav">
+            <div class="deznav-scroll">
+                <ul class="metismenu" id="menu">
+                 
+                    <li><a class="has-arrow ai-icon" href="/eventapp/{{request.session.eventid}}" aria-expanded="false">
+                            <i class="flaticon-381-networking"></i>
+                            <span class="nav-text">Inicio</span>
+                        </a>
+                    </li>
+                    <li><a class="has-arrow ai-icon" href="/Progress" aria-expanded="false">
+                              <i class="flaticon-381-calendar"></i>
+                            <span class="nav-text">Mi Progreso</span>
+                        </a>
+                    </li>
+                    <li><a class="has-arrow ai-icon" href="/uploadprogress" aria-expanded="false">
+                             <i class="flaticon-381-television"></i>
+                            <span class="nav-text">Cargar Progress</span>
+                        </a>
+                    </li>
+                    <li><a class="has-arrow ai-icon" href="/myevent" aria-expanded="false">
+                           <i class="flaticon-381-user"></i>
+                            <span class="nav-text">Mis Eventos</span>
+                        </a>
+                    </li>
+         
+                    <li><a class="has-arrow ai-icon" href="/logout" aria-expanded="false">
+                           <i class="flaticon-381-user"></i>
+                            <span class="nav-text">Cerrar Sesión</span>
+                        </a>
+                    </li>
+         
+
+
+                </ul>
+
+            </div>
+        </div>
+        <div class="content-body">
+            {% block body %}
+
+            {% endblock body %}
+        </div>
+        <div class="footer">
+            <div class="copyright">
+                <p>Copyright © Designed &amp; Developed by RZB</a> 2020</p>
+            </div>
+        </div>
+    </div>
+    <script src="{% static '' %}public/vendor/global/global.min.js" type="text/javascript"></script>
+    <script src="{% static '' %}public/vendor/bootstrap-select/dist/js/bootstrap-select.min.js"
+        type="text/javascript"></script>
+    <script src="{% static '' %}public/vendor/chart.js/Chart.bundle.min.js" type="text/javascript"></script>
+    <script src="{% static '' %}public/vendor/owl-carousel/owl.carousel.js" type="text/javascript"></script>
+    <script src="{% static '' %}public/vendor/apexchart/apexchart.js" type="text/javascript"></script>
+    <script src="{% static '' %}public/js/dashboard/dashboard-1.js" type="text/javascript"></script>
+    <script src="{% static '' %}public/js/custom.min.js" type="text/javascript"></script>
+    <script src="{% static '' %}public/js/deznav-init.js" type="text/javascript"></script>
+    {% block script %}{% endblock script %}
+</body>
+
+<!-- Mirrored from karciz.dexignzone.com/laravel/demo/index by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 28 Mar 2021 20:21:25 GMT -->
+
+</html>
